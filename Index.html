@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Recommendation System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <!-- Logo (App Name or Image) -->
+      <a href="/" class="logo">MuxicRec</a>
+
+      <!-- Navigation Links -->
+      <div class="nav-links">
+        <a href="./pages/Home.html">Home</a>
+        <a href="./pages/genres.html">Genres</a>
+        <a href="./pages/library.html">Your Library</a>
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <input type="text" placeholder="Search songs, artists, albums..." />
+        </div>
+        <!-- Music Icon (optional clickable feature like opening a music player or feature) -->
+        <div class="music-icon">🎵</div>
+        <!-- Navigation Links-2 -->
+        <a href="./pages/profile.html">Profile</a>
+        <a href="./pages/login.html">Login</a>
+      </div>
+    </nav>
+
+    <!-- Main container -->
+    <div class="container" id="recommend-music">
+      <h1>Music Recommendation System</h1>
+      <p>Detect your mood to get personalized music recommendations!</p>
+
+      <!-- Image of happy and sad faces -->
+      <img id="face-image" src="./assets/absm.png" alt="" />
+
+      <!-- Video feed placeholder (hidden initially) -->
+      <video id="video" autoplay></video>
+
+      <button onclick="detectMood()">Detect Mood</button>
+      
+      <div id="result"></div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

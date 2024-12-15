@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Library with Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body> 
+     <button class="home-btn" onclick="window.location.href='index.html';">Home</button> <!-- Replace 'index.html' with your home page link -->
+    <div class="container">    
+        <!-- Profile Section -->
+        <div id="profile-section">
+            <img id="profile-picture" src="https://media.licdn.com/dms/image/v2/D4D03AQHiOaGxq9viyQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727447961067?e=1736985600&v=beta&t=sSpENI4YP42quy4CZHTNHnIs3xapf2CHlB8twZxBavM" alt="Profile Picture">
+            <h2 id="profile-name">Anshika</h2>
+            <p id="profile-email">anshika@example.com</p>
+            <button id="edit-profile-btn">Edit Profile</button>
+        </div>
+       
+        <hr>
+
+        <!-- Playlist Library Section -->
+        <h1>My Playlist Library</h1>
+        <div id="playlist-section">
+            <h2>Create New Playlist</h2>
+            <input type="text" id="playlist-name" placeholder="Enter playlist name">
+            <button id="create-playlist-btn">Create Playlist</button>
+        </div>
+
+        <div id="playlists">
+            <h2>Your Playlists</h2>
+            <div id="playlist-list"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initial Profile Data
+        const profile = {
+            name: "Anshika",
+            email: "anshika@example.com",
+            picture: "https://media.licdn.com/dms/image/v2/D4D03AQHiOaGxq9viyQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727447961067?e=1736985600&v=beta&t=sSpENI4YP42quy4CZHTNHnIs3xapf2CHlB8twZxBavM"
+        };
+
+        // Function to update profile display
+        function updateProfileDisplay() {
+            document.getElementById('profile-name').textContent = profile.name;
+            document.getElementById('profile-email').textContent = profile.email;
+            document.getElementById('profile-picture').src = profile.picture;
+        }
+
+        // Edit Profile Handler
+        document.getElementById('edit-profile-btn').addEventListener('click', () => {
+            const newName = prompt("Enter your name:", profile.name);
+            const newEmail = prompt("Enter your email:", profile.email);
+            const newPicture = prompt("Enter the URL of your profile picture:", profile.picture);
+
+            if (newName) profile.name = newName;
+            if (newEmail) profile.email = newEmail;
+            if (newPicture) profile.picture = newPicture;
+
+            updateProfileDisplay();
+        });
+
+        // Initialize profile on page load
+        updateProfileDisplay();
+    </script>
+</body>
+</html>

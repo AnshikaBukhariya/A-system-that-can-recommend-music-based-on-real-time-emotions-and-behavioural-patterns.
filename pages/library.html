@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Library</title>
+    <link rel="stylesheet" href="library.css">
+</head>
+<body>
+     <!-- Home Button -->
+     <button class="home-btn" onclick="loadPage('http://127.0.0.1:5500/Index.html')">Home</button>
+
+    <div class="container">
+        <h1>My Playlist Library</h1>
+        <div id="playlist-section">
+            <h2>Create New Playlist</h2>
+            <input type="text" id="playlist-name" placeholder="Enter playlist name">
+            <button id="create-playlist-btn">Create Playlist</button>
+        </div>
+
+        <div id="playlists">
+            <h2>Your Playlists</h2>
+            <div id="playlist-list"></div>
+        </div>
+    </div>
+    <script>
+        // script.js
+
+// Array to hold playlists
+let playlists = [];
+
+// Add event listener to the "Create Playlist" button
+document.getElementById('create-playlist-btn').addEventListener('click', () => {
+    const playlistName = document.getElementById('playlist-name').value.trim();
+    if (playlistName) {
+        // Add playlist to the list
+        playlists.push({
+            name: playlistName,
+            songs: []
+        });
+        document.getElementById('playlist-name').value = ''; // Clear input field
+        renderPlaylists();
+    } else {
+        alert('Please enter a playlist name.');
+    }
+});
+
+// Function to render playlists
+function renderPlaylists() {
+    const playlistList = document.getElementById('playlist-list');
+    playlistList.innerHTML = ''; // Clear previous content
+
+    playlists.forEach((playlist, index) => {
+        const playlistDiv = document.createElement('div');
+        playlistDiv.className = 'playlist';
+
+        const playlistTitle = document.createElement('h3');
+        playlistTitle.textContent = playlist.name;
+
+        const songList = document.createElement('ul');
+        playlist.songs.forEach(song => {
+            const songItem = document.createElement('li');
+            songItem.textContent = song;
+            songList.appendChild(songItem);
+        });
+
+        const addSongButton = document.createElement('button');
+        addSongButton.textContent = 'Add Song';
+        addSongButton.addEventListener('click', () => {
+            const songName = prompt(`Add a song to "${playlist.name}"`);
+            if (songName) {
+                playlist.songs.push(songName);
+                renderPlaylists();
+            }
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete Playlist';
+        deleteButton.addEventListener('click', () => {
+            playlists.splice(index, 1);
+            renderPlaylists();
+        });
+
+        playlistDiv.appendChild(playlistTitle);
+        playlistDiv.appendChild(songList);
+        playlistDiv.appendChild(addSongButton);
+        playlistDiv.appendChild(deleteButton);
+
+        playlistList.appendChild(playlistDiv);
+    });
+}
+
+    </script>
+</body>
+</html>

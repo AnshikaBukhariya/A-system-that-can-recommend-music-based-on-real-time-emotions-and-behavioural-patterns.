@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Recommendation System</title>
+    <link rel="stylesheet" href="genres.css">
+</head>
+<body>
+  <!-- Home Button -->
+  <button class="home-btn" onclick="window.location.href='index.html';">Home</button> <!-- Replace 'index.html' with your home page link -->
+    <div class="container">
+        <h1>Music Recommendation System</h1>
+        <p>Select a Mood or Genre:</p>
+        <div class="button-group">
+            <button class="option-btn" data-category="Happy">Happy</button>
+            <button class="option-btn" data-category="Sad">Sad</button>
+            <button class="option-btn" data-category="Dance">Party</button>
+            <button class="option-btn" data-category=" motivation">motivation</button>
+            <button class="option-btn" data-category="relaxation">relaxation</button>
+            <button class="option-btn" data-category="Classical">Classical</button>
+            <button class="option-btn" data-category="Travel">Travel</button>
+            <button class="option-btn" data-category="Rock">Rock</button>
+            <button class="option-btn" data-category="HipHop">Hip-Hop</button>
+        </div>
+        <div>
+            <label for="language">Select Language:</label>
+            <select id="language">
+                <option value="hindi">Hindi</option>
+                <option value="english">English</option>
+            </select>
+        </div>
+
+        <div id="recommendations">
+            <h2>Recommended Songs:</h2>
+            <ul id="song-list"></ul>
+        </div>
+    </div>
+    <script> 
+        // script.js
+
+// Sample data for mood-based recommendations
+const songDatabase = {
+    Happy: {
+      hindi: [
+        "Chalti Hai Kya 9 Se 12 - Judwaa",
+        "Pehla Nasha - Jo Jeeta Wohi Sikandar",
+        "Laung Laachi - Laung Laachi",
+        "Zinda - Bhaag Milkha Bhaag",
+        "Galla Goodiyan - Dil Dhadakne Do",
+        "Ladki Beautiful - Kapoor & Sons",
+        "Dil Dhadakne Do - Zindagi Na Milegi Dobara",
+        "Gallan Goodiyan - Dil Dhadakne Do"
+      ],
+      english: [
+        "Happy - Pharrell Williams",
+        "Uptown Funk - Mark Ronson ft. Bruno Mars",
+        "Can’t Stop the Feeling - Justin Timberlake",
+        "Best Day of My Life - American Authors",
+        "Good Time - Owl City & Carly Rae Jepsen",
+        "I Gotta Feeling - Black Eyed Peas",
+        "Shake It Off - Taylor Swift",
+        "On Top of the World - Imagine Dragons"
+      ]
+    },
+    Sad: {
+      hindi: [
+        "Channa Mereya - Ae Dil Hai Mushkil",
+        "Agar Tum Saath Ho - Tamasha",
+        "Tujhe Bhula Diya - Anjaana Anjaani",
+        "Tum Hi Ho - Aashiqui 2",
+        "Kabira - Yeh Jawaani Hai Deewani",
+        "Tadap Tadap - Hum Dil De Chuke Sanam",
+        "Jeene Laga Hoon - Ramaiya Vastavaiya",
+        "Bekhayali - Kabir Singh"
+      ],
+      english: [
+        "Someone Like You - Adele",
+        "Fix You - Coldplay",
+        "When I Was Your Man - Bruno Mars",
+        "The Scientist - Coldplay",
+        "Let Her Go - Passenger",
+        "Happier - Ed Sheeran",
+        "Stay With Me - Sam Smith",
+        "All of Me - John Legend"
+      ]
+    },
+    Dance: {
+      hindi: [
+        "Saturday Saturday - Humpty Sharma Ki Dulhania",
+        "Bom Diggy Diggy - Sonu Ke Titu Ki Sweety",
+        "Garmi - Street Dancer 3D",
+        "Kala Chashma - Baar Baar Dekho",
+        "Dil Dhadakne Do - Zindagi Na Milegi Dobara",
+        "The Disco Song - Student of the Year",
+        "Apna Time Aayega - Gully Boy",
+        "Lungi Dance - Chennai Express"
+      ],
+      english: [
+        "Dynamite - BTS",
+        "Uptown Funk - Mark Ronson ft. Bruno Mars",
+        "Levitating - Dua Lipa ft. DaBaby",
+        "Blinding Lights - The Weeknd",
+        "Cheap Thrills - Sia",
+        "Don’t Start Now - Dua Lipa",
+        "Despacito - Luis Fonsi",
+        "Waka Waka - Shakira"
+      ]
+    },
+    Motivation: {
+      hindi: [
+        "Zinda - Bhaag Milkha Bhaag",
+        "Lakshya - Lakshya",
+        "Kar Har Maidaan Fateh - Sanju",
+        "Apna Time Aayega - Gully Boy",
+        "Aashayein - Iqbal",
+        "Chale Chalo - Lagaan",
+        "Besabriyaan - M.S. Dhoni",
+        "Lakshya - Lakshya"
+      ],
+      english: [
+        "Eye of the Tiger - Survivor",
+        "Lose Yourself - Eminem",
+        "Hall of Fame - The Script ft. will.i.am",
+        "Don’t Stop Believin’ - Journey",
+        "Stronger - Kanye West",
+        "We Are the Champions - Queen",
+        "Born This Way - Lady Gaga",
+        "Unstoppable - Sia"
+      ]
+    },
+    Relaxation: {
+      hindi: [
+        "Tera Yaar Hoon Main - Sonu Ke Titu Ki Sweety",
+        "Kaise Hua - Kabir Singh",
+        "Tum Se Hi - Jab We Met",
+        "Ilahi - Yeh Jawaani Hai Deewani",
+        "Raabta - Agent Vinod",
+        "Tera Ban Jaunga - Kabir Singh",
+        "Phir Se Ud Chala - Rockstar",
+        "Safarnama - Tamasha"
+      ],
+      english: [
+        "Lovely - Billie Eilish & Khalid",
+        "The A Team - Ed Sheeran",
+        "Let It Be - The Beatles",
+        "Somewhere Only We Know - Keane",
+        "Say You Won’t Let Go - James Arthur",
+        "Ocean Eyes - Billie Eilish",
+        "Lost Stars - Adam Levine",
+        "Clocks - Coldplay"
+      ]
+    },
+    Classical: {
+      hindi: [
+        "Lag Ja Gale - Woh Kaun Thi",
+        "Tere Bina Zindagi Se - Aandhi",
+        "Aaj Jaane Ki Zid Na Karo - Farida Khanum",
+        "Piya Tose Naina Laage Re - Guide",
+        "Mohe Panghat Pe - Mughal-e-Azam",
+        "Ae Mere Humsafar - Baazigar",
+        "Kehna Hi Kya - Bombay",
+        "Chalte Chalte - Pakeezah"
+      ],
+      english: [
+        "Canon in D - Johann Pachelbel",
+        "Clair de Lune - Claude Debussy",
+        "Für Elise - Ludwig van Beethoven",
+        "The Four Seasons - Vivaldi",
+        "Piano Sonata No. 14 - Beethoven",
+        "Ave Maria - Schubert",
+        "Nocturne in E-flat Major - Chopin",
+        "Symphony No. 9 - Beethoven"
+      ]
+    },
+    Travel: {
+      hindi: [
+        "Ilahi - Yeh Jawaani Hai Deewani",
+        "Safarnama - Tamasha",
+        "Khaabon Ke Parinday - Zindagi Na Milegi Dobara",
+        "Zindagi Ek Safar - Andaz",
+        "Patakha Guddi - Highway",
+        "Journey Song - Piku",
+        "Kyun - Barfi!",
+        "Phir Se Ud Chala - Rockstar"
+      ],
+      english: [
+        "On Top of the World - Imagine Dragons",
+        "Paradise - Coldplay",
+        "I’m Gonna Be (500 Miles) - The Proclaimers",
+        "Holiday - Green Day",
+        "Wake Me Up - Avicii",
+        "Home - Edward Sharpe & The Magnetic Zeros",
+        "Life Is a Highway - Rascal Flatts",
+        "Send Me On My Way - Rusted Root"
+      ]
+    },
+    Rock: {
+      hindi: [
+        "Rock On!! - Rock On!!",
+        "Zehreelay - Rock On!!",
+        "Socha Hai - Rock On!!",
+        "Bhaag DK Bose - Delhi Belly",
+        "Sadda Haq - Rockstar",
+        "Nadaan Parindey - Rockstar",
+        "Tum Ho Toh - Rock On!!",
+        "Dil Dhadakne Do - Zindagi Na Milegi Dobara"
+      ],
+      english: [
+        "Smells Like Teen Spirit - Nirvana",
+        "Bohemian Rhapsody - Queen",
+        "Stairway to Heaven - Led Zeppelin",
+        "Boulevard of Broken Dreams - Green Day",
+        "Livin’ on a Prayer - Bon Jovi",
+        "Rolling in the Deep - Adele",
+        "We Will Rock You - Queen",
+        "In the End - Linkin Park"
+      ]
+    },
+    HipHop: {
+      hindi: [
+        "Apna Time Aayega - Gully Boy",
+        "Meri Gully Mein - Gully Boy",
+        "Azadi Ke Liye - Rang De Basanti",
+        "Main Wahi Hoon - Gully Boy",
+        "Dilli Waali Baatcheet - Gully Boy",
+        "Chal Mere Bhai - Gully Boy",
+        "Bantai - Dilli Waali Baatcheet",
+        "Kar Gayi Chull - Kapoor & Sons"
+      ],
+      english: [
+        "Lose Yourself - Eminem",
+        "HUMBLE. - Kendrick Lamar",
+        "Sicko Mode - Travis Scott",
+        "DNA. - Kendrick Lamar",
+        "Rap God - Eminem",
+        "God's Plan - Drake",
+        "The Real Slim Shady - Eminem",
+        "Without Me - Eminem"
+      ]
+    }
+  };
+  
+
+// Add event listeners to all buttons
+document.querySelectorAll('.option-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        const selectedLanguage = document.getElementById('language').value;
+        const recommendations = songDatabase[category] ? songDatabase[category][selectedLanguage] : [];
+
+        const songList = document.getElementById('song-list');
+        songList.innerHTML = ''; // Clear previous results
+
+        if (recommendations.length > 0) {
+            recommendations.forEach(song => {
+                const li = document.createElement('li');
+                li.textContent = song;
+                songList.appendChild(li);
+            });
+        } else {
+            songList.innerHTML = '<li>No recommendations available.</li>';
+        }
+    });
+});
+</script>
+</body>
+</html>

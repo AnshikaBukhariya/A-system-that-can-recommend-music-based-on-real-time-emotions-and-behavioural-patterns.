@@ -1,0 +1,180 @@
+/* Basic CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("/");
+  background-size: cover; /* Make the background image cover the entire screen */
+  background-position: center; /* Center the background image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background-attachment: fixed; /* Make the background fixed while scrolling */
+}
+
+/* Basic reset */
+body,
+h1,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
+}
+
+/* Navbar container */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #181818;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo or App name */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1db954; /* Spotify green color */
+  text-decoration: none;
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #b3b3b3;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #1db954;
+  color: white;
+}
+
+/* Search bar styling */
+.search-bar input {
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: none;
+  width: 200px;
+  background-color: #333;
+  color: white;
+  outline: none;
+  transition: width 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+  width: 250px;
+}
+
+/* Music note icon */
+.music-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #1db954;
+  transition: color 0.3s;
+}
+
+.music-icon:hover {
+  color: white;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+}
+
+/* Main container styling */
+.container {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 8px;
+  color: #b3b3b3;
+
+  background-color: rgb(20, 20, 20); /* Set the background color to white */
+  box-shadow: 0 4px 8px rgba(6, 6, 6, 0.2);
+  margin-top: 80px; /* Adjusted for fixed navbar */
+  backdrop-filter: blur(
+    5px
+  ); /* Optional: Adds a blur effect to the background */
+  opacity: 1; /* Set opacity to 1 for full visibility */
+}
+
+h1 {
+  color: #3da72d;
+}
+
+#video {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px 0;
+  border-radius: 8px;
+  display: none; /* Hidden initially */
+}
+
+#result {
+  font-size: 1.2em;
+  color: #36a53a;
+}
+
+#face-image {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px 0;
+  border-radius: 8px;
+  display: block; /* Show image by default */
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1b821e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}

@@ -1,0 +1,87 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark theme background */
+    color: #e0e0e0; /* Light gray text */
+    margin: 0;
+    padding: 0;
+}
+.home-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background for the button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 100; /* Ensure the button is above other content */
+}
+
+.home-btn:hover {
+    background-color: #45a049; /* Darker green for hover effect */
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #1db954; /* Spotify green color */
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border: 2px solid #1db954;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #1db954;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #1ed760;
+}
+
+#playlists {
+    margin-top: 30px;
+}
+
+.playlist {
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #1db954;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    text-align: left;
+}
+
+.playlist h3 {
+    color: #1db954;
+}
+
+.playlist button {
+    margin-top: 10px;
+    background-color: #e63946; /* Red for delete button */
+}
+
+.playlist button:hover {
+    background-color: #f45c66;
+}
